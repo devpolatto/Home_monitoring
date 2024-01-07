@@ -12,7 +12,7 @@ services:
       - "prometheus-data:/prometheus"
     ports:
       - "9090:${PROMETHEUS_PORT}"
-    entrypoint: /bin/bash
+    entrypoint: /bin/sh
     command: 
       - "-c"
       - "/scripts/init.sh"
