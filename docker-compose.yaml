@@ -15,7 +15,7 @@ services:
     entrypoint: /bin/sh
     command: 
       - "-c"
-      - "/scripts/init.sh"
+      - "chmod +x /scripts/init.sh && /scripts/init.sh"
     
     restart: unless-stopped
     networks:
