@@ -12,7 +12,7 @@ services:
       - "prometheus-data:/prometheus"
     ports:
       - "9090:${PROMETHEUS_PORT}"
-    command: /bin/sh "/scripts"
+    command: /bin/sh "/scripts/init.sh"
     
     restart: unless-stopped
     networks:
