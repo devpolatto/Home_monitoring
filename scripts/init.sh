@@ -1,4 +1,4 @@
-#!/bin/bash -c
+#!/bin/bash
 
 cat <<EOF > /etc/prometheus/prometheus.yaml
 global:
