@@ -7,7 +7,7 @@ services:
     image: prom/prometheus:v2.37.9
     container_name: prometheus
     volumes:
-      - /etc/prometheus/prometheus.yaml:/prometheus.yaml
+      - /prometheus.yaml:/etc/prometheus/prometheus.yaml/
       - prometheus-data:/prometheus
     ports:
       - "9090:${PROMETHEUS_PORT}"
