@@ -7,15 +7,11 @@ services:
     image: prom/prometheus:v2.37.9
     container_name: prometheus
     volumes:
-      - ./scripts/init.sh:/scripts/init.sh
-      # - /etc/prometheus/prometheus.yaml:/etc/prometheus/prometheus.yaml
-      - "prometheus-data:/prometheus"
+      - /etc/prometheus/prometheus.yaml:/prometheus.yaml
+      - prometheus-data:/prometheus
     ports:
       - "9090:${PROMETHEUS_PORT}"
-    entrypoint: /bin/sh
-    command: 
-      - "-c"
-      - "chmod +x /scripts/init.sh && /scripts/init.sh"
+    command: --config.file=/etc/prometheus/prometheus.yaml
     
     restart: unless-stopped
     networks:
