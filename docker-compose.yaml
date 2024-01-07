@@ -1,0 +1,51 @@
+---
+version: '3'
+
+services:
+
+  prometheus:
+    image: prom/prometheus:v2.37.9
+    container_name: prometheus
+    volumes:
+      - /etc/prometheus/prometheus.yaml:/etc/prometheus/prometheus.yaml
+      - "prometheus-data:/prometheus"
+    ports:
+      - "9090:${PROMETHEUS_PORT}"
+    command: "--config.file=/etc/prometheus/prometheus.yaml"
+    
+    restart: unless-stopped
+    networks:
+      - midgard
+
+  grafana:
+    image: grafana/grafana-oss:latest
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    volumes:
+      - "grafana-data:/var/lib/grafana"
+    restart: unless-stopped
+    networks:
+      - midgard
+
+  node_exporter:
+    image: quay.io/prometheus/node-exporter:latest
+    container_name: node_exporter
+    command:
+      - '--path.rootfs=/host'
+    network_mode: host
+    pid: host
+    restart: unless-stopped
+    volumes:
+      - '/:/host:ro,rslave'
+
+volumes:
+  grafana-data:
+    driver: local
+  prometheus-data:
+    driver: local
+
+networks:
+  midgard:
+    name: midgard_bridge
+    external: true
