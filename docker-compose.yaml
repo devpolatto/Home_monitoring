@@ -7,11 +7,14 @@ services:
     image: prom/prometheus:v2.37.9
     container_name: prometheus
     volumes:
-      - ./prometheus.yaml:/etc/prometheus/prometheus.yaml/
+      - ./:/host
       - prometheus-data:/prometheus
     ports:
       - "9090:${PROMETHEUS_PORT}"
-    command: --config.file=/etc/prometheus/prometheus.yaml
+    command: 
+      - "/bin/sh"
+      - "-c"
+      - "cp /host/prometheus.yaml /etc/prometheus/prometheus.yaml && /bin/prometheus --config.file=/etc/prometheus/prometheus.yaml"
     
     restart: unless-stopped
     networks:
