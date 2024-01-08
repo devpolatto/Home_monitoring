@@ -1,5 +1,3 @@
-#!/bin/sh
-
 cat <<EOF > /etc/prometheus/prometheus.yaml
 global:
   scrape_interval:     15s # By default, scrape targets every 15 seconds.

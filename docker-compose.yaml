@@ -14,7 +14,7 @@ services:
     entrypoint: "/bin/sh"
     command: 
       - "-c"
-      - "cp /host/prometheus.yaml /etc/prometheus/prometheus.yaml && /bin/prometheus --config.file=/etc/prometheus/prometheus.yaml"
+      - /host/scripts/init.sh && /bin/prometheus --config.file=/etc/prometheus/prometheus.yaml"
     
     restart: unless-stopped
     networks:
